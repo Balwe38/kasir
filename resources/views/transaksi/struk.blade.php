@@ -14,8 +14,8 @@
 
             <div id="struk" class="bg-white shadow-sm rounded-lg p-6 font-mono text-sm">
                 <div class="text-center mb-4">
-                    <p class="font-bold text-base">TOKO ANDA</p>
-                    <p class="text-xs text-gray-500">Jl. Contoh Alamat No. 123</p>
+                    <p class="font-bold text-base">TOKO KELONTONG</p>
+                    <p class="text-xs text-gray-500">Jl. Gambir  No. 123</p>
                 </div>
 
                 <div class="border-t border-dashed border-gray-400 my-2"></div>
