@@ -22,7 +22,7 @@ class TransactionDetail extends Model
     ];
 
     public function produk()
-    {
-        return $this->belongsTo(Produk::class, 'id_product');
-    }
+{
+    return $this->belongsTo(Produk::class, 'id_product')->withTrashed();
+}
 }
