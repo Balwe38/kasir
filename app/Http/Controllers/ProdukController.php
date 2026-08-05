@@ -41,7 +41,7 @@ class ProdukController extends Controller
             'nama_produk' => $request->nama_produk,
             'harga' => $request->harga,
             'stok' => $request->stok,
-            'description' => $request->deskripsi,
+            'description' => $request->description,
             'status' => true,
             'created_by' => auth()->id(),
         ]);
@@ -87,11 +87,11 @@ class ProdukController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy(Produk $produk)
-{
-    $produk->delete();
+    public function destroy(Produk $produk)
+    {
+        $produk->delete();
 
-    return redirect()->route('produk.index')
-        ->with('success', 'Produk berhasil dihapus');
-}
+        return redirect()->route('produk.index')
+            ->with('success', 'Produk berhasil dihapus');
+    }
 }
