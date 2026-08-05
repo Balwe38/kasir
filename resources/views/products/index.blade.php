@@ -28,7 +28,6 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Gambar</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Produk</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Harga</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stok</th>
@@ -39,11 +38,6 @@
                             @forelse ($produks as $produk)
                                 <tr>
                                     <td class="px-6 py-4 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                                    <td class="px-6 py-4">
-                                        <img src="{{ asset('storage/produks/' . $produk->gambar) }}"
-                                             alt="{{ $produk->nama_produk }}"
-                                             class="w-12 h-12 object-cover rounded">
-                                    </td>
                                     <td class="px-6 py-4 text-sm text-gray-700">{{ $produk->nama_produk }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-700">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-700">{{ $produk->stok }}</td>

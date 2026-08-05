@@ -70,9 +70,18 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nama_produk' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+        ]);
+        $product = Produk::findOrFail($id);
+        $product->update($validated);
+        return redirect()->route('produk.index')
+            ->with('success', 'Produk berhasil Di Edit.');
     }
 
     /**

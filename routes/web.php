@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
  ->name('produk.create');
  Route::post('products', [ProdukController::class, 'store'])
  ->name('produk.store');
-  Route::patch('/products/{id}', [ProdukController::class, 'update'])
- ->name('produk.update');
+  Route::patch('/products/{id}', [ProdukController::class, 'edit'])
+ ->name('produk.edit');
  Route::get('/products/{id}/edit', [ProdukController::class, 'edit'])
  ->name('produk.edit');
  Route::get('/profile', [ProfileController::class, 'edit'])
