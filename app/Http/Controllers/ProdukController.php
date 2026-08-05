@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdukRequest;
+use App\Models\Kategori;
 use App\Models\Produk;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
@@ -15,36 +15,26 @@ class ProdukController extends Controller
      */
     public function index(): View
     {
-        $produks = Produk::latest()->get();
+        $produks = Produk::with('kategori')->latest()->get();
         return view("products.index", compact('produks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view("products.create");
+        $kategoris = Kategori::orderBy('nama_kategori')->get();
+
+        return view('products.create', compact('kategoris'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ProdukRequest $request)
     {
-        $request->validate([
-            'nama_produk' => 'required|string|max:255',
-            'harga' => 'required|numeric|min:0',
-            'stok' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
-        Produk::create([
-            'code' => 'PRD-' . strtoupper(Str::random(8)), // contoh kode
-            'nama_produk' => $request->nama_produk,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'description' => $request->description,
-            'status' => true,
-            'created_by' => auth()->id(),
-        ]);
+        $data['code'] = 'PRD-' . strtoupper(Str::random(8));
+        $data['status'] = true;
+        $data['created_by'] = auth()->id();
+
+        Produk::create($data);
 
         return redirect()->route('produk.index')
             ->with('success', 'Produk berhasil ditambahkan.');
@@ -70,16 +60,10 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ProdukRequest $request, $id)
     {
-        $validated = $request->validate([
-            'nama_produk' => 'required|string|max:255',
-            'harga' => 'required|numeric|min:0',
-            'stok' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
         $product = Produk::findOrFail($id);
-        $product->update($validated);
+        $product->update($request->validated());
         return redirect()->route('produk.index')
             ->with('success', 'Produk berhasil Di Edit.');
     }

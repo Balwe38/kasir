@@ -15,6 +15,13 @@ return new class extends Migration {
             $table->decimal('harga', 10, 2);
             $table->integer('stok');
             $table->text('description')->nullable();
+            $table->uuid('kategori_id');
+            $table->foreign('kategori_id')
+                ->references('id')
+                ->on('kategoris')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+                
             $table->boolean('status')->default(true);
 
             $table->softDeletes();

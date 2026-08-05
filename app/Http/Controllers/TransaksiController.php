@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TransaksiRequest;
 use App\Models\Produk;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -72,12 +73,8 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.index');
     }
 
-    public function simpan(Request $request)
+    public function simpan(TransaksiRequest $request)
     {
-        $request->validate([
-            'name_cust' => 'required|string|max:255',
-            'bayar'     => 'required|numeric|min:0',
-        ]);
 
         $keranjang = session('keranjang', []);
 

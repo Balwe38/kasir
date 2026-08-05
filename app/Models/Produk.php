@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produk extends Model
-
 {
     use SoftDeletes;
     use HasUuids;
@@ -18,6 +17,7 @@ class Produk extends Model
         'harga',
         'stok',
         'description',
+        'kategori_id',
         'status',
         'created_by',
     ];
@@ -31,7 +31,13 @@ class Produk extends Model
     ];
 
     public function transactionDetails()
-{
-    return $this->hasMany(\App\Models\TransactionDetail::class, 'id_product');
-}
+    {
+        return $this->hasMany(TransactionDetail::class, 'id_product');
+    }
+
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }
