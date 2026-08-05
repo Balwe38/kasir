@@ -17,8 +17,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // ZONA KASIR — Hanya role 'kasir' yang boleh masuk
 Route::middleware(['auth', 'role:kasir'])->group(function () {
- Route::get('/kasir', fn() => view('dashboard'))
- ->name('dashboard');
+ Route::get('/kasir', fn() => view('kasir.dashboard'))
+ ->name('kasir.dashboard');
 });
 
 // ZONA PROFIL — Semua yang sudah login

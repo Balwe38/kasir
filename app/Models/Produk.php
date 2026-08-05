@@ -3,24 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Produk extends Model
 {
-    //
+    use HasUuids;
+
     protected $fillable = [
         'code',
-        'name',
-        'description',
-        'price',
+        'nama_produk',
+        'harga',
+        'stok',
+        'deskripsi',
         'status',
+        'created_by',
     ];
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $casts = [
         'status' => 'boolean',
-    ];
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
     ];
 }

@@ -7,20 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('produks', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('code', 150)->unique();
-            $table->string('nama_produk', 50);
-            $table->decimal('harga', 10, 2);
-            $table->integer('stok');
-            $table->text('description')->nullable();
-            $table->boolean('status')->default(true);
-
-            $table->foreignUuid('created_by')
+            $table->foreignUuid('id_kasir')
                 ->constrained('users')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
+
+            $table->string('number_transaction');
+            $table->string('name_cust');
+            $table->timestamp('transaction_date');
+            $table->integer('total_price');
 
             $table->timestamps();
         });
@@ -28,6 +26,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('transactions');
     }
 };

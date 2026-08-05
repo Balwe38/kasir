@@ -6,6 +6,7 @@ use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -26,32 +27,27 @@ class ProdukController extends Controller
         return view("products.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
-        // Validasi ekstra ketat!
         $request->validate([
             'nama_produk' => 'required|string|max:255',
-            'harga'       => 'required|numeric|min:0',
-            'stok'        => 'required|numeric|min:0',
-            'gambar'      => 'required|file|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
         ]);
 
-        $image = $request->file('gambar');
-        $nama_gambar = $image->hashName(); // Acak nama file!
-        $image->storeAs('produks', $nama_gambar, 'public');
-
         Produk::create([
+            'code' => 'PRD-' . strtoupper(Str::random(8)), // contoh kode
             'nama_produk' => $request->nama_produk,
-            'harga'       => $request->harga,
-            'stok'        => $request->stok,
-            'gambar'      => $nama_gambar,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'description' => $request->deskripsi,
+            'status' => true,
+            'created_by' => auth()->id(),
         ]);
 
         return redirect()->route('produk.index')
-            ->with('success', 'Aman cuy, produk masuk!');
+            ->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
