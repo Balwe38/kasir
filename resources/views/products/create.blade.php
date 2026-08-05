@@ -11,13 +11,6 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('produk.store') }}" method="POST">
                         @csrf
-                        <!-- Code -->
-                        <div>
-                            <x-input-label for="code" :value="__('Code')" />
-                            <x-text-input id="code" class="block mt-1 w-full" type="text" name="code"
-                                :value="old('code')" required autofocus autocomplete="code" />
-                            <x-input-error :messages="$errors->get('code')" class="mt-2" />
-                        </div>
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('Name')" />
