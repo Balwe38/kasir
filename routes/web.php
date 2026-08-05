@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,8 +17,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // ZONA KASIR — Hanya role 'kasir' yang boleh masuk
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
-    // Route::get('/kasir', fn() => view('kasir.dashboard'))
-    //     ->name('kasir.dashboard');
     Route::get('/kasir', function () {
         return view('kasir.dashboard');
     })->name('kasir.dashboard');
@@ -30,9 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/products', [ProdukController::class, 'index'])
             ->name('produk.index');
-
-        Route::get('/transaction', [TransactionController::class, 'index'])
-            ->name('transaction.index');
     });
     Route::get('products/create', [ProdukController::class, 'create'])
         ->name('produk.create');
