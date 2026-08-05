@@ -24,10 +24,18 @@
                 </div>
             @endif
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
-                <p class="text-sm text-gray-600">Tanggal: {{ now()->translatedFormat('d F Y') }}</p>
-                <p class="text-sm text-gray-600">Kasir: {{ auth()->user()->name }}</p>
-            </div>
+            <div class="bg-white shadow rounded-lg p-4 mb-6 flex justify-between items-center">
+                
+          <div>
+        <p>Tanggal: {{ now()->translatedFormat('d F Y') }}</p>
+        <p>Kasir: {{ auth()->user()->name }}</p>
+          </div>
+
+         <a href="{{ route('transaksi.riwayat') }}"
+         class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
+          Riwayat Transaksi
+           </a>
+         </div>
 
             <div class="bg-white shadow-sm rounded-lg p-6">
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-4">

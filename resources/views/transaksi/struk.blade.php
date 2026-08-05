@@ -103,6 +103,8 @@
             <div class="text-center print:hidden">
                 <a href="{{ route('transaksi.riwayat') }}" class="text-sm text-gray-600 underline">Lihat Riwayat Transaksi</a>
             </div>
+            
+            </div>
 
         </div>
     </div>
