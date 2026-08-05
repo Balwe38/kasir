@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
  ->name('produk.store');
   Route::patch('/products/{id}', [ProdukController::class, 'edit'])
  ->name('produk.edit');
- Route::get('/products/{id}/edit', [ProdukController::class, 'edit'])
- ->name('produk.edit');
+ Route::get('/products/{id}', [ProdukController::class, 'update'])
+ ->name('produk.update');
  Route::get('/profile', [ProfileController::class, 'edit'])
  ->name('profile.edit');
  Route::patch('/profile', [ProfileController::class, 'update'])
