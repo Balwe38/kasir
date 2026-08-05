@@ -12,13 +12,6 @@
                     <form action="{{ route('produk.update', $product->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <!-- Code -->
-                        <div>
-                            <x-input-label for="code" :value="__('Code')" />
-                            <x-text-input id="code" class="block mt-1 w-full" type="text" name="code"
-                                :value="old('code', $product->code)" required autofocus autocomplete="code" />
-                            <x-input-error :messages="$errors->get('code')" class="mt-2" />
-                        </div>
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('Name')" />
