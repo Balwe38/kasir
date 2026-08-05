@@ -31,6 +31,12 @@ class TransaksiController extends Controller
         $produk = Produk::findOrFail($request->produk_id);
 
         $keranjang = session('keranjang', []);
+        $currentQty = $keranjang[$produk->id]['qty'] ?? 0;
+
+        if ($currentQty >= $produk->stok) {
+            return redirect()->route('transaksi.index')
+                ->with('error', 'Stok produk "' . $produk->nama_produk . '" hanya tersedia ' . $produk->stok . '.');
+        }
 
         if (isset($keranjang[$produk->id])) {
             $keranjang[$produk->id]['qty']++;
@@ -94,16 +100,18 @@ class TransaksiController extends Controller
         ]);
 
         foreach ($keranjang as $produk_id => $item) {
+
             TransactionDetail::create([
-                'id_transaction'   => $transaction->id,
-                'id_product'       => $produk_id,
-                'qty'              => $item['qty'],
-                'price'            => $item['harga'],
-                'discount_price'   => $item['discount_price'] ?? 0,
+                'id_transaction' => $transaction->id,
+                'id_product' => $produk_id,
+                'qty' => $item['qty'],
+                'price' => $item['harga'],
+                'discount_price' => $item['discount_price'] ?? 0,
                 'discount_percent' => $item['discount_percent'] ?? 0,
             ]);
 
-            Produk::where('id', $produk_id)->decrement('stok', $item['qty']);
+            Produk::where('id', $produk_id)
+                ->decrement('stok', $item['qty']);
         }
 
         // simpan info bayar & kembalian sementara untuk ditampilkan di struk
