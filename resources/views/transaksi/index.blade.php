@@ -37,7 +37,8 @@
            </a>
          </div>
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 
+    transition-shadow duration-300 hover:shadow-md p-6">
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-4">
                     <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Cari nama produk..."
                         class="w-full border-gray-300 rounded-md shadow-sm">

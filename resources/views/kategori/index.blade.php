@@ -22,10 +22,7 @@
                         + Tambah Kategori
                     </a>
 
-                    <a href="{{ route('produk.index') }}"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        📦 Produk
-                    </a>
+                   
 
                 </div>
             </div>
