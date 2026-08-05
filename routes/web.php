@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,7 +17,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 // ZONA KASIR — Hanya role 'kasir' yang boleh masuk
-Route::middleware(['auth', 'role:kasir'])->group(function () {
+Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
  Route::get('/kasir', fn() => view('kasir.dashboard'))
  ->name('kasir.dashboard');
 });
@@ -39,7 +40,13 @@ Route::middleware('auth')->group(function () {
  ->name('profile.update');
  Route::delete('/profile', [ProfileController::class, 'destroy'])
  ->name('profile.destroy');
+
+
+    // route lainnya...
 });
+
+
+
 
 
 require __DIR__.'/auth.php';
