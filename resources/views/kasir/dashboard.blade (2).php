@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Kasir Dashboard
+            Dashboard Kasir - Apotek Sehat
         </h2>
     </x-slot>
 
@@ -11,22 +11,22 @@
             {{-- Card Statistik --}}
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
 
-                <div class="bg-blue-500 rounded-xl shadow text-white p-6">
+                <div class="bg-teal-600 rounded-xl shadow text-white p-6">
                     <p class="text-sm opacity-80">Transaksi Hari Ini</p>
                     <h2 class="text-4xl font-bold mt-2">
                         {{ $totalTransaksi }}
                     </h2>
                 </div>
 
-                <div class="bg-green-500 rounded-xl shadow text-white p-6">
+                <div class="bg-emerald-600 rounded-xl shadow text-white p-6">
                     <p class="text-sm opacity-80">Pendapatan Hari Ini</p>
                     <h2 class="text-3xl font-bold mt-2">
                         Rp {{ number_format($pendapatanHariIni,0,',','.') }}
                     </h2>
                 </div>
 
-                <div class="bg-purple-500 rounded-xl shadow text-white p-6">
-                    <p class="text-sm opacity-80">Produk Terjual</p>
+                <div class="bg-cyan-600 rounded-xl shadow text-white p-6">
+                    <p class="text-sm opacity-80">Obat Terjual</p>
                     <h2 class="text-4xl font-bold mt-2">
                         {{ $produkTerjual }}
                     </h2>
@@ -46,12 +46,12 @@
                 {{-- Transaksi Terbaru --}}
                 <div class="lg:col-span-2 bg-white rounded-xl shadow overflow-hidden">
 
-                    <div class="border-b p-5 font-semibold">
+                    <div class="border-b p-5 font-semibold text-teal-700">
                         Transaksi Terbaru
                     </div>
 
                     <table class="w-full">
-                        <thead class="bg-gray-100">
+                        <thead class="bg-teal-50">
                             <tr>
                                 <th class="text-left p-3">Invoice</th>
                                 <th class="text-left p-3">Customer</th>
@@ -62,7 +62,7 @@
 
                         <tbody>
                             @forelse($transaksiTerbaru as $trx)
-                                <tr class="border-t hover:bg-gray-50">
+                                <tr class="border-t hover:bg-teal-50/40">
                                     <td class="p-3">{{ $trx->number_transaction }}</td>
                                     <td class="p-3">{{ $trx->name_cust }}</td>
                                     <td class="p-3">
@@ -88,8 +88,8 @@
                 {{-- Monitoring Stok --}}
                 <div class="bg-white rounded-xl shadow overflow-hidden">
 
-                    <div class="border-b p-5 font-semibold">
-                        Produk Hampir Habis
+                    <div class="border-b p-5 font-semibold text-teal-700">
+                        Obat Hampir Habis
                     </div>
 
                     @forelse($stokMenipis as $produk)
@@ -115,7 +115,7 @@
                     @empty
 
                         <div class="p-6 text-center text-gray-500">
-                            Semua stok aman
+                            Semua stok obat aman
                         </div>
 
                     @endforelse
@@ -127,8 +127,8 @@
             {{-- Grafik Penjualan --}}
             <div class="mt-6 bg-white rounded-xl shadow p-6">
 
-                <h3 class="font-semibold text-lg mb-5">
-                    📈 Penjualan 7 Hari Terakhir
+                <h3 class="font-semibold text-lg mb-5 text-teal-700">
+                    📈 Penjualan Obat 7 Hari Terakhir
                 </h3>
 
                 <canvas id="salesChart" height="90"></canvas>
@@ -152,8 +152,8 @@
                 datasets: [{
                     label: 'Pendapatan',
                     data: data,
-                    borderColor: '#4F46E5',
-                    backgroundColor: 'rgba(79,70,229,.15)',
+                    borderColor: '#0d9488',
+                    backgroundColor: 'rgba(13,148,136,.15)',
                     borderWidth: 3,
                     fill: true,
                     tension: .4,

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('List Produk') }}
+            {{ __('Daftar Obat') }}
         </h2>
     </x-slot>
 
@@ -18,8 +18,8 @@
                 <div class="p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
 
                     <a href="{{ route('produk.create') }}" class="w-full sm:w-auto
-            bg-blue-600
-            hover:bg-blue-700
+            bg-teal-600
+            hover:bg-teal-700
             hover:scale-105
             active:scale-95
             transition-all
@@ -32,7 +32,7 @@
             shadow
             hover:shadow-lg
             text-center">
-                        + Tambah Produk
+                        + Tambah Obat
                     </a>
 
 
@@ -43,32 +43,35 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-4 sm:p-6 text-gray-900 overflow-x-auto">
                     <table class="min-w-full whitespace-nowrap divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr class="transition-all duration-200 hover:bg-gray-50">
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Produk
+                        <thead class="bg-teal-50">
+                            <tr class="transition-all duration-200 hover:bg-teal-50">
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">No</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Nama Obat
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Kategori
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Kategori
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Harga</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stok</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Harga</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Stok</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($produks as $produk)
-                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                <tr class="transition-all duration-200 hover:bg-teal-50/40">
                                     <td class="px-3 sm:px-6 py-3 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                     <td class="px-3 sm:px-6 py-3 text-sm text-gray-700">{{ $produk->nama_produk }}</td>
 
                                     <td class="px-3 sm:px-6 py-3 text-sm">
                                         @php
+                                            // Sesuaikan nama kategori berikut dengan kategori obat
+                                            // yang benar-benar ada di tabel `kategoris`.
                                             $badge = match ($produk->kategori->nama_kategori ?? '') {
-                                                'Sembako' => 'bg-green-100 text-green-800',
-                                                'Minuman' => 'bg-blue-100 text-blue-800',
-                                                'Snack' => 'bg-yellow-100 text-yellow-800',
-                                                'Makanan' => 'bg-red-100 text-red-800',
-                                                'Elektronik' => 'bg-purple-100 text-purple-800',
+                                                'Tablet' => 'bg-teal-100 text-teal-800',
+                                                'Sirup' => 'bg-cyan-100 text-cyan-800',
+                                                'Kapsul' => 'bg-sky-100 text-sky-800',
+                                                'Injeksi' => 'bg-red-100 text-red-800',
+                                                'Salep' => 'bg-amber-100 text-amber-800',
+                                                'Alat Kesehatan' => 'bg-purple-100 text-purple-800',
                                                 default => 'bg-gray-100 text-gray-800',
                                             };
                                         @endphp
@@ -86,7 +89,7 @@
 
         <!-- Tombol Edit -->
         <a href="{{ route('produk.edit', $produk->id) }}"
-            class="inline-flex items-center gap-2 rounded-lg bg-blue-500 px-3 py-2 text-white hover:bg-blue-600 transition">
+            class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-3 py-2 text-white hover:bg-teal-700 transition">
 
             <svg xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4"
@@ -105,7 +108,7 @@
         <!-- Tombol Hapus -->
         <form action="{{ route('produk.destroy', $produk->id) }}"
             method="POST"
-            onsubmit="return confirm('Yakin mau hapus produk ini?')">
+            onsubmit="return confirm('Yakin mau hapus obat ini?')">
 
             @csrf
             @method('DELETE')
@@ -133,9 +136,9 @@
 </td>
                                 </tr>
                             @empty
-                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                <tr class="transition-all duration-200 hover:bg-teal-50/40">
                                     <td colspan="6" class="px-3 sm:px-6 py-3 text-center text-gray-500">
-                                        Belum ada produk.
+                                        Belum ada obat.
                                     </td>
                                 </tr>
                             @endforelse

@@ -5,30 +5,43 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Kasir\DashboardController as KasirDashboardController;
 
+use App\Http\Controllers\Admin\LaporanController;
+
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// ====================
+
 // ADMIN
-// ====================
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    Route::get('/admin', [AdminDashboardController::class, 'index'])
-        ->name('admin.dashboard');
+
+   Route::get('/admin', [AdminDashboardController::class, 'index'])
+    ->name('admin.dashboard');
 
     Route::resource('products', ProdukController::class)
         ->names('produk');
 
     Route::resource('kategori', KategoriController::class);
+
+
+    // LAPORAN
+    Route::get('/laporan', [LaporanController::class, 'index'])
+        ->name('laporan.index');
+
 });
 
+
 // ====================
+
+
 // KASIR
 // ====================
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {

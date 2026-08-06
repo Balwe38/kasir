@@ -14,8 +14,8 @@
 
             <div id="struk" class="bg-white shadow-sm rounded-lg p-6 font-mono text-sm">
                 <div class="text-center mb-4">
-                    <p class="font-bold text-base">TOKO KELONTONG</p>
-                    <p class="text-xs text-gray-500">Jl. Gambir  No. 123</p>
+                    <p class="font-bold text-base">APOTEK SEHAT</p>
+                    <p class="text-xs text-gray-500">Jl. Kesehatan No. 123</p>
                 </div>
 
                 <div class="border-t border-dashed border-gray-400 my-2"></div>
@@ -45,7 +45,7 @@
                     @foreach ($transaksi->details as $detail)
                         <div>
                             <div class="flex justify-between">
-                                <span>{{ $detail->produk->nama_produk ?? 'Produk dihapus' }}</span>
+                                <span>{{ $detail->produk->nama_produk ?? 'Obat dihapus' }}</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-600">
                                 <span>{{ $detail->qty }} x Rp {{ number_format($detail->price, 0, ',', '.') }}</span>
@@ -88,22 +88,20 @@
 
                 <div class="border-t border-dashed border-gray-400 my-2"></div>
 
-                <p class="text-center text-xs mt-4">Terima kasih atas kunjungan Anda</p>
+                <p class="text-center text-xs mt-4">Semoga lekas sembuh 🙏</p>
             </div>
 
             <div class="flex gap-2 print:hidden">
                 <button onclick="window.print()" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
                     Cetak Struk
                 </button>
-                <a href="{{ route('transaksi.index') }}" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('transaksi.index') }}" class="flex-1 text-center bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
                     Transaksi Baru
                 </a>
             </div>
 
             <div class="text-center print:hidden">
                 <a href="{{ route('transaksi.riwayat') }}" class="text-sm text-gray-600 underline">Lihat Riwayat Transaksi</a>
-            </div>
-            
             </div>
 
         </div>

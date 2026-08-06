@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl font-bold text-gray-800">
-            Dashboard Admin
+            Dashboard Admin - Apotek Sehat
         </h2>
     </x-slot>
 
@@ -9,18 +9,18 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             {{-- Statistik --}}
-            
+
 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
 
-    {{-- Produk --}}
-    <div class="bg-blue-500 rounded-xl shadow text-white p-6 
+    {{-- Produk / Obat --}}
+    <div class="bg-teal-600 rounded-xl shadow text-white p-6 
                 transition hover:-translate-y-1 hover:shadow-lg">
 
         <div class="flex justify-between items-center">
 
             <div>
                 <p class="text-sm opacity-80">
-                    Total Produk
+                    Total Obat
                 </p>
 
                 <h2 class="text-4xl font-bold mt-2">
@@ -28,8 +28,8 @@
                 </h2>
             </div>
 
-            <div class="bg-white/20 p-3 rounded-full">
-                📦
+            <div class="bg-white/20 p-3 rounded-full text-2xl">
+                💊
             </div>
 
         </div>
@@ -38,14 +38,14 @@
 
 
     {{-- Kategori --}}
-    <div class="bg-green-500 rounded-xl shadow text-white p-6
+    <div class="bg-cyan-600 rounded-xl shadow text-white p-6
                 transition hover:-translate-y-1 hover:shadow-lg">
 
         <div class="flex justify-between items-center">
 
             <div>
                 <p class="text-sm opacity-80">
-                    Total Kategori
+                    Total Kategori Obat
                 </p>
 
                 <h2 class="text-4xl font-bold mt-2">
@@ -53,8 +53,8 @@
                 </h2>
             </div>
 
-            <div class="bg-white/20 p-3 rounded-full">
-                🏷️
+            <div class="bg-white/20 p-3 rounded-full text-2xl">
+                🧴
             </div>
 
         </div>
@@ -63,7 +63,7 @@
 
 
     {{-- Transaksi --}}
-    <div class="bg-indigo-500 rounded-xl shadow text-white p-6
+    <div class="bg-sky-600 rounded-xl shadow text-white p-6
                 transition hover:-translate-y-1 hover:shadow-lg">
 
         <div class="flex justify-between items-center">
@@ -78,7 +78,7 @@
                 </h2>
             </div>
 
-            <div class="bg-white/20 p-3 rounded-full">
+            <div class="bg-white/20 p-3 rounded-full text-2xl">
                 🧾
             </div>
 
@@ -101,8 +101,8 @@
             </h2>
         </div>
 
-        <div class="bg-white/20 p-3 rounded-full">
-            💰
+        <div class="bg-white/20 p-3 rounded-full text-2xl">
+            💵
         </div>
 
     </div>
@@ -119,7 +119,7 @@
                 <div class="lg:col-span-2 bg-white rounded-xl shadow">
 
                     <div class="border-b px-6 py-4">
-                        <h3 class="font-semibold text-lg">
+                        <h3 class="font-semibold text-lg text-teal-700">
                             Transaksi Terbaru
                         </h3>
                     </div>
@@ -128,19 +128,19 @@
 
                         <table class="min-w-full">
 
-                            <thead class="bg-gray-100">
+                            <thead class="bg-teal-50">
 
                                 <tr>
 
-                                    <th class="px-6 py-3 text-left">
-                                        Invoice
+                                    <th class="px-6 py-3 text-left text-teal-700">
+                                        No. Invoice
                                     </th>
 
-                                    <th class="px-6 py-3 text-left">
+                                    <th class="px-6 py-3 text-left text-teal-700">
                                         Total
                                     </th>
 
-                                    <th class="px-6 py-3 text-left">
+                                    <th class="px-6 py-3 text-left text-teal-700">
                                         Tanggal
                                     </th>
 
@@ -152,7 +152,7 @@
 
                                 @forelse($transaksiTerbaru as $item)
 
-                                    <tr class="border-b">
+                                    <tr class="border-b hover:bg-teal-50/40">
 
                                         <td class="px-6 py-4">
                                             {{ $item->number_transaction }}
@@ -188,22 +188,22 @@
 
                 </div>
 
-               
-                {{-- Monitoring Stok --}}
+
+                {{-- Monitoring Stok Obat --}}
 <div class="bg-white rounded-xl shadow">
 
-    <div class="border-b px-6 py-4 flex justify-between items-center">
+    <div class="border-b px-6 py-4 flex justify-between items-center flex-wrap gap-2">
 
-        <h3 class="font-semibold text-lg">
-            📦 Monitoring Stok
+        <h3 class="font-semibold text-lg text-teal-700">
+            💊 Stok Obat Menipis
         </h3>
 
         <span class="text-sm text-red-500">
-            {{ $stokMenipis->count() }} produk
+            {{ $stokMenipis->count() }} obat
         </span>
 
          <a href="{{ route('produk.index') }}"
-       class="text-sm text-blue-600 hover:underline">
+       class="text-sm text-teal-600 hover:underline">
         Lihat Semua
     </a>
 
@@ -214,7 +214,7 @@
 
         @forelse($stokMenipis as $produk)
 
-            <div class="flex justify-between items-center py-3 border-b hover:bg-gray-50 transition">
+            <div class="flex justify-between items-center py-3 border-b hover:bg-teal-50/40 transition">
 
                 <div>
                     <p class="font-medium text-gray-800">
@@ -261,7 +261,7 @@
                 </div>
 
                 <p class="text-gray-500 mt-2">
-                    Semua stok aman
+                    Semua stok obat aman
                 </p>
 
             </div>
@@ -278,8 +278,8 @@
 
 <div class="bg-white rounded-xl shadow p-6">
 
-    <h3 class="font-semibold text-lg mb-4">
-        📈 Penjualan 7 Hari Terakhir
+    <h3 class="font-semibold text-lg mb-4 text-teal-700">
+        📈 Penjualan Obat 7 Hari Terakhir
     </h3>
 
     <canvas id="salesChart" height="100"></canvas>
@@ -307,9 +307,9 @@ new Chart(ctx, {
 
             data: @json(collect($penjualanHarian)->pluck('total')),
 
-            borderColor: '#4f46e5',
+            borderColor: '#0d9488',
 
-            backgroundColor: 'rgba(79,70,229,0.2)',
+            backgroundColor: 'rgba(13,148,136,0.15)',
 
             tension: 0.4,
 
@@ -340,5 +340,5 @@ new Chart(ctx, {
 
 </script>
 
-    
+
 </x-app-layout>

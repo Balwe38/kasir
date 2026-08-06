@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create Kategori') }}
+            {{ __('Tambah Kategori Obat') }}
         </h2>
     </x-slot>
 
@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="mt-2">
-                            <x-input-label for="nama_kategori" :value="__('Nama Kategori')" />
+                            <x-input-label for="nama_kategori" :value="__('Nama Kategori Obat')" />
 
                             <x-text-input id="nama_kategori" class="block mt-1 w-full" type="text" name="nama_kategori"
                                 :value="old('nama_kategori')" required autofocus />
@@ -26,8 +26,8 @@
                         <div class="mt-6 flex flex-col sm:flex-row gap-3">
 
                             <button type="submit" class="w-full sm:w-auto
-bg-blue-600
-hover:bg-blue-700
+bg-teal-600
+hover:bg-teal-700
 hover:scale-105
 active:scale-95
 transition-all

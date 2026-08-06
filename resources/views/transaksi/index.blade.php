@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Transaksi Kasir</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Kasir - Apotek Sehat</h2>
     </x-slot>
 
     @if(session('error'))
@@ -40,11 +40,11 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 
     transition-shadow duration-300 hover:shadow-md p-6">
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-4">
-                    <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Cari nama produk..."
-                        class="w-full border-gray-300 rounded-md shadow-sm">
+                    <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Cari nama obat..."
+                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
                 </form>
 
-                <h3 class="font-semibold mb-2">Daftar Produk</h3>
+                <h3 class="font-semibold mb-2 text-teal-700">Daftar Obat</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr class="text-left text-xs text-gray-500 uppercase">
@@ -65,7 +65,7 @@
                                         @csrf
                                         <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                                         <button type="submit" @disabled($produk->stok < 1)
-                                            class="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-3 py-1 rounded text-xs">
+                                            class="bg-teal-600 hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-3 py-1 rounded text-xs">
                                             +
                                         </button>
                                     </form>
@@ -73,7 +73,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="py-4 text-center text-gray-500">Produk tidak ditemukan</td>
+                                <td colspan="4" class="py-4 text-center text-gray-500">Obat tidak ditemukan</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -81,11 +81,11 @@
             </div>
 
             <div class="bg-white shadow-sm rounded-lg p-6">
-                <h3 class="font-semibold mb-2">Keranjang</h3>
+                <h3 class="font-semibold mb-2 text-teal-700">Keranjang</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr class="text-left text-xs text-gray-500 uppercase">
-                            <th class="py-2">Produk</th>
+                            <th class="py-2">Obat</th>
                             <th class="py-2">Qty</th>
                             <th class="py-2">Harga</th>
                             <th class="py-2">Diskon</th>
@@ -125,7 +125,7 @@
                     </tbody>
                 </table>
 
-                <div class="mt-4 text-right font-semibold text-lg">
+                <div class="mt-4 text-right font-semibold text-lg text-teal-700">
                     Total: Rp {{ number_format($total, 0, ',', '.') }}
                 </div>
             </div>
@@ -136,7 +136,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Nama Customer</label>
                         <input type="text" name="name_cust" required value="{{ old('name_cust') }}"
-                            class="w-full border-gray-300 rounded-md shadow-sm">
+                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
                         @error('name_cust')
                             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
@@ -144,13 +144,13 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Bayar</label>
                         <input type="number" name="bayar" required min="0" value="{{ old('bayar') }}"
-                            class="w-full border-gray-300 rounded-md shadow-sm">
+                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
                         @error('bayar')
                             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <button type="submit" @disabled(empty($keranjang))
-                        class="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded">
+                        class="bg-teal-600 hover:bg-teal-700 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded">
                         Simpan Transaksi
                     </button>
                 </form>

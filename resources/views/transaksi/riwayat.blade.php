@@ -22,7 +22,7 @@
                             name="cari"
                             value="{{ request('cari') }}"
                             placeholder="Cari..."
-                            class="w-full border-gray-300 rounded-md shadow-sm">
+                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
                     </div>
 
                     <div>
@@ -33,11 +33,11 @@
                         <input type="date"
                             name="tanggal"
                             value="{{ request('tanggal') }}"
-                            class="border-gray-300 rounded-md shadow-sm">
+                            class="border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
                     </div>
 
                     <button type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+                        class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
                         Cari
                     </button>
 
@@ -51,99 +51,102 @@
                 </form>
             </div>
 
+
             <!-- Tabel -->
             <div class="bg-white shadow-sm rounded-lg overflow-hidden">
 
-                <table class="min-w-full divide-y divide-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-[900px] w-full divide-y divide-gray-200">
 
-                    <thead class="bg-gray-50">
-                        <tr class="text-left text-xs font-semibold uppercase text-gray-500">
-                            <th class="px-4 py-3">No. Transaksi</th>
-                            <th class="px-4 py-3">Barang</th>
-                            <th class="px-4 py-3">Tanggal</th>
-                            <th class="px-4 py-3">Customer</th>
-                            <th class="px-4 py-3">Kasir</th>
-                            <th class="px-4 py-3">Total</th>
-                            <th class="px-4 py-3 text-center">Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="divide-y divide-gray-200">
-
-                        @forelse($transaksis as $trx)
-
-                            <tr class="hover:bg-gray-50">
-
-                                <td class="px-4 py-3">
-                                    {{ $trx->number_transaction }}
-                                </td>
-
-                                <!-- Barang -->
-                                <td class="px-4 py-3">
-                                    @forelse($trx->details as $detail)
-                                        <span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded mb-1">
-                                            {{ $detail->produk->nama_produk ?? '-' }}
-                                        </span><br>
-                                    @empty
-                                        <span class="text-gray-400">-</span>
-                                    @endforelse
-                                </td>
-
-                                <td class="px-4 py-3">
-                                    {{ \Carbon\Carbon::parse($trx->transaction_date)->translatedFormat('d M Y H:i') }}
-                                </td>
-
-                                <td class="px-4 py-3">
-                                    {{ $trx->name_cust }}
-                                </td>
-
-                                <td class="px-4 py-3">
-                                    {{ $trx->kasir->name ?? '-' }}
-                                </td>
-
-                                <td class="px-4 py-3 font-semibold">
-                                    Rp {{ number_format($trx->total_price, 0, ',', '.') }}
-                                </td>
-
-                                <td class="px-4 py-3 text-center">
-
-                                    <a href="{{ route('transaksi.struk', $trx->id) }}"
-                                        class="inline-flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded text-sm">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-4 h-4"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor">
-
-                                            <path stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M9 12h6m-6 4h6M7 4h10a2 2 0 012 2v14l-3-2-3 2-3-2-3 2V6a2 2 0 012-2z"/>
-
-                                        </svg>
-
-                                        Lihat Struk
-
-                                    </a>
-
-                                </td>
-
+                        <thead class="bg-teal-50">
+                            <tr class="text-left text-xs font-semibold uppercase text-teal-700">
+                                <th class="px-4 py-3 whitespace-nowrap">No. Transaksi</th>
+                                <th class="px-4 py-3 whitespace-nowrap">Obat</th>
+                                <th class="px-4 py-3 whitespace-nowrap">Tanggal</th>
+                                <th class="px-4 py-3 whitespace-nowrap">Customer</th>
+                                <th class="px-4 py-3 whitespace-nowrap">Kasir</th>
+                                <th class="px-4 py-3 whitespace-nowrap">Total</th>
+                                <th class="px-4 py-3 text-center whitespace-nowrap">Aksi</th>
                             </tr>
+                        </thead>
 
-                        @empty
+                        <tbody class="divide-y divide-gray-200">
 
-                            <tr>
-                                <td colspan="7" class="py-6 text-center text-gray-500">
-                                    Belum ada transaksi.
-                                </td>
-                            </tr>
+                            @forelse($transaksis as $trx)
 
-                        @endforelse
+                                <tr class="hover:bg-teal-50/40">
 
-                    </tbody>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        {{ $trx->number_transaction }}
+                                    </td>
 
-                </table>
+                                    <!-- Barang -->
+                                    <td class="px-4 py-3">
+                                        @forelse($trx->details as $detail)
+                                            <span class="inline-block bg-teal-100 text-teal-700 text-xs px-2 py-1 rounded mb-1 whitespace-nowrap">
+                                                {{ $detail->produk->nama_produk ?? '-' }}
+                                            </span><br>
+                                        @empty
+                                            <span class="text-gray-400">-</span>
+                                        @endforelse
+                                    </td>
+
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        {{ \Carbon\Carbon::parse($trx->transaction_date)->translatedFormat('d M Y H:i') }}
+                                    </td>
+
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        {{ $trx->name_cust }}
+                                    </td>
+
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        {{ $trx->kasir->name ?? '-' }}
+                                    </td>
+
+                                    <td class="px-4 py-3 font-semibold whitespace-nowrap">
+                                        Rp {{ number_format($trx->total_price, 0, ',', '.') }}
+                                    </td>
+
+                                    <td class="px-4 py-3 text-center whitespace-nowrap">
+
+                                        <a href="{{ route('transaksi.struk', $trx->id) }}"
+                                            class="inline-flex items-center gap-1 bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded text-sm">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-4 h-4"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor">
+
+                                                <path stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M9 12h6m-6 4h6M7 4h10a2 2 0 012 2v14l-3-2-3 2-3-2-3 2V6a2 2 0 012-2z"/>
+
+                                            </svg>
+
+                                            Lihat Struk
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            @empty
+
+                                <tr>
+                                    <td colspan="7" class="py-6 text-center text-gray-500">
+                                        Belum ada transaksi.
+                                    </td>
+                                </tr>
+
+                            @endforelse
+
+                        </tbody>
+
+                    </table>
+                </div>
 
                 <div class="p-4">
                     {{ $transaksis->links() }}

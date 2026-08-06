@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('List Kategori') }}
+            {{ __('Daftar Kategori Obat') }}
         </h2>
     </x-slot>
 
@@ -18,8 +18,8 @@
                 <div class="p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
 
                     <a href="{{ route('kategori.create') }}" class="w-full sm:w-auto
-bg-green-600
-hover:bg-green-700
+bg-teal-600
+hover:bg-teal-700
 hover:scale-105
 active:scale-95
 transition-all
@@ -32,7 +32,7 @@ rounded-lg
 shadow
 hover:shadow-lg
 text-center">
-                        + Tambah Kategori
+                        + Tambah Kategori Obat
                     </a>
 
 
@@ -44,16 +44,16 @@ text-center">
                 <div class="p-4 sm:p-6 text-gray-900 overflow-x-auto">
 
                     <table class="min-w-full whitespace-nowrap divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr class="transition-all duration-200 hover:bg-gray-50">
-                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No
+                        <thead class="bg-teal-50">
+                            <tr class="transition-all duration-200 hover:bg-teal-50">
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">No
                                 </th>
-                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Nama
                                     Kategori</th>
-                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">
                                     Jumlah
-                                    Produk</th>
-                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
+                                    Obat</th>
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-teal-700 uppercase">Aksi
                                 </th>
                             </tr>
                         </thead>
@@ -61,7 +61,7 @@ text-center">
                         <tbody class="divide-y divide-gray-200">
 
                             @forelse ($kategoris as $kategori)
-                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                <tr class="transition-all duration-200 hover:bg-teal-50/40">
                                     <td class="px-3 sm:px-6 py-4 text-sm text-gray-700">
                                         {{ $loop->iteration }}
                                     </td>
@@ -80,8 +80,8 @@ text-center">
                                         px-3
                                         py-1
                                         rounded-md
-                                        text-blue-600
-                                        hover:bg-blue-600
+                                        text-teal-600
+                                        hover:bg-teal-600
                                         hover:text-white
                                         transition-all
                                         duration-200
@@ -114,7 +114,7 @@ text-center">
 
                             @empty
 
-                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                <tr class="transition-all duration-200 hover:bg-teal-50/40">
                                     <td colspan="4" class="px-3 sm:px-6 py-4 text-center text-gray-500">
                                         Belum ada kategori.
                                     </td>

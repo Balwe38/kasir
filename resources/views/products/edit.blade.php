@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Produk') }}
+            {{ __('Edit Obat') }}
         </h2>
     </x-slot>
 
@@ -20,7 +20,7 @@ duration-300">
                         @method('PUT')
                         <!-- Name -->
                         <div class="mt-4">
-                            <x-input-label for="name" :value="__('Name')" />
+                            <x-input-label for="name" :value="__('Nama Obat')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="nama_produk"
                                 :value="old('nama_produk', $product->nama_produk)" required autofocus
                                 autocomplete="name" />
@@ -28,7 +28,7 @@ duration-300">
                         </div>
                         <!-- Harga -->
                         <div class="mt-4">
-                            <x-input-label for="price" :value="__('Price')" />
+                            <x-input-label for="price" :value="__('Harga')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" name="harga"
                                 :value="old('price', $product->harga)" required autofocus autocomplete="price" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
@@ -42,7 +42,7 @@ duration-300">
                         </div>
                         <!-- deksripsi -->
                         <div class="mt-4">
-                            <x-input-label for="description" :value="__('Description')" />
+                            <x-input-label for="description" :value="__('Deskripsi')" />
                             <x-text-input id="description" class="block mt-1 w-full" type="text" name="description"
                                 :value="old('description', $product->description)" autofocus
                                 autocomplete="description" />
@@ -50,10 +50,10 @@ duration-300">
                         </div>
                         <!-- kategori -->
                         <div class="mt-4">
-                            <x-input-label for="kategori_id" :value="__('Category')" />
+                            <x-input-label for="kategori_id" :value="__('Kategori Obat')" />
 
                             <select id="kategori_id" name="kategori_id"
-                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500"
                                 required>
                                 <option value="">-- Pilih Kategori --</option>
 
@@ -70,8 +70,8 @@ duration-300">
                         <input type="submit" value="Simpan" class="mt-6
 w-full
 sm:w-auto
-bg-blue-600
-hover:bg-blue-700
+bg-teal-600
+hover:bg-teal-700
 text-white
 font-semibold
 px-6

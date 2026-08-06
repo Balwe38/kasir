@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Kategori') }}
+            {{ __('Edit Kategori Obat') }}
         </h2>
     </x-slot>
 
@@ -20,7 +20,7 @@
 
                             <x-input-label
                                 for="nama_kategori"
-                                :value="__('Nama Kategori')" />
+                                :value="__('Nama Kategori Obat')" />
 
                             <x-text-input
                                 id="nama_kategori"
@@ -41,7 +41,7 @@
 
                             <button
                                 type="submit"
-                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                                class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
                                 Update
                             </button>
 
