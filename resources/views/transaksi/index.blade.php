@@ -1,7 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Kasir - Apotek Sehat</h2>
-    </x-slot>
+    <div class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 rounded-2xl shadow-lg p-5 text-white">
+        <h2 class="text-3xl font-bold">
+            💊 Kasir - Apotek Sehat
+        </h2>
+        <p class="text-emerald-100">
+            Sistem Penjualan Obat
+        </p>
+    </div>
+</x-slot>
 
     @if(session('error'))
         <script>
@@ -24,27 +31,36 @@
                 </div>
             @endif
 
-            <div class="bg-white shadow rounded-lg p-4 mb-6 flex justify-between items-center">
-                
-          <div>
-        <p>Tanggal: {{ now()->translatedFormat('d F Y') }}</p>
-        <p>Kasir: {{ auth()->user()->name }}</p>
-          </div>
+            <div class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 rounded-2xl shadow-xl p-6 flex justify-between items-center text-white">
 
-         <a href="{{ route('transaksi.riwayat') }}"
-         class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
-          Riwayat Transaksi
-           </a>
-         </div>
+    <div>
+        <h3 class="text-2xl font-bold">
+            💊 Apotek Sehat
+        </h3>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 
-    transition-shadow duration-300 hover:shadow-md p-6">
+        <p class="text-sm opacity-90 mt-2">
+            📅 {{ now()->translatedFormat('d F Y') }}
+        </p>
+
+        <p class="text-sm opacity-90">
+            👨‍⚕️ Kasir : {{ auth()->user()->name }}
+        </p>
+    </div>
+
+    <a href="{{ route('transaksi.riwayat') }}"
+        class="bg-white text-emerald-700 font-semibold px-5 py-3 rounded-xl hover:scale-105 transition">
+        📋 Riwayat
+    </a>
+
+</div>
+
+            <div class="bg-white rounded-3xl shadow-xl border border-emerald-100 p-6">
                 <form method="GET" action="{{ route('transaksi.index') }}" class="mb-4">
                     <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Cari nama obat..."
-                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
+                        class="w-full rounded-xl border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500">
                 </form>
 
-                <h3 class="font-semibold mb-2 text-teal-700">Daftar Obat</h3>
+                <h3 class="text-2xl font-bold text-emerald-700 mb-5">Daftar Obat</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr class="text-left text-xs text-gray-500 uppercase">
@@ -65,7 +81,15 @@
                                         @csrf
                                         <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                                         <button type="submit" @disabled($produk->stok < 1)
-                                            class="bg-teal-600 hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-3 py-1 rounded text-xs">
+                                            class="bg-emerald-600 hover:bg-emerald-700
+text-white
+rounded-full
+w-10
+h-10
+font-bold
+transition
+hover:scale-110
+disabled:bg-gray-300">
                                             +
                                         </button>
                                     </form>
@@ -80,8 +104,8 @@
                 </table>
             </div>
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
-                <h3 class="font-semibold mb-2 text-teal-700">Keranjang</h3>
+            <div class="bg-white rounded-3xl shadow-xl p-6 border border-emerald-100">
+                <h3 class="text-2xl font-bold text-emerald-700 mb-5">🛒 Keranjang Belanja</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr class="text-left text-xs text-gray-500 uppercase">
@@ -125,32 +149,52 @@
                     </tbody>
                 </table>
 
-                <div class="mt-4 text-right font-semibold text-lg text-teal-700">
-                    Total: Rp {{ number_format($total, 0, ',', '.') }}
+                <div class="mt-6 bg-emerald-50 rounded-2xl border-2 border-emerald-400 p-5 text-right">
+                    <p class="text-gray-500">
+Total Pembayaran
+</p>
+
+<h2 class="text-2xl font-bold text-emerald-700">
+Rp {{ number_format($total,0,',','.') }}
+</h2>
+                    
                 </div>
             </div>
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
+            <div class="bg-white rounded-3xl shadow-xl p-8 border border-emerald-100">
                 <form action="{{ route('transaksi.simpan') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Nama Customer</label>
                         <input type="text" name="name_cust" required value="{{ old('name_cust') }}"
-                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
+                            class="w-full rounded-xl border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500">
                         @error('name_cust')
                             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Bayar</label>
+                        <label class="text-1xl font-bold text-emerald-700 mb-6">💳 Pembayaran</label>
                         <input type="number" name="bayar" required min="0" value="{{ old('bayar') }}"
-                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500">
+                            class="w-full rounded-xl border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500">
                         @error('bayar')
                             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <button type="submit" @disabled(empty($keranjang))
-                        class="bg-teal-600 hover:bg-teal-700 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded">
+                        class=" w-full
+bg-gradient-to-r
+from-emerald-600
+to-teal-500
+hover:from-emerald-700
+hover:to-teal-600
+text-white
+font-bold
+py-4
+rounded-2xl
+shadow-lg
+transition
+hover:scale-[1.02]
+disabled:bg-gray-400">
                         Simpan Transaksi
                     </button>
                 </form>
