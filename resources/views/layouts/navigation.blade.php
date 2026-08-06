@@ -1,9 +1,20 @@
+@php
+    $isAdminPage =
+        auth()->user()->role === 'admin' &&
+        (
+            request()->routeIs('admin.dashboard') ||
+            request()->routeIs('produk.*') ||
+            request()->routeIs('kategori.*') ||
+            request()->routeIs('transaksi.*')
+        );
+@endphp
+
 <aside class="bg-white border-r border-gray-100 flex flex-col transition-all duration-300 ease-in-out shrink-0"
     :class="sidebarOpen ? 'w-64' : 'w-20'">
 
     <!-- Logo + Toggle -->
     <div class="flex items-center justify-between h-16 px-4 border-b border-gray-100">
-        <a href="{{ route('kasir.dashboard') }}" class="flex items-center gap-2 overflow-hidden group">
+        <a href="{{ $isAdminPage ? route('admin.dashboard') : route('kasir.dashboard') }}" class="flex items-center gap-2 overflow-hidden group">
             <x-application-logo
                 class="block h-8 w-auto fill-current text-gray-800 shrink-0 transition-transform duration-300 group-hover:rotate-12" />
             <span x-show="sidebarOpen" x-transition:enter="transition ease-out duration-200 delay-75"
@@ -31,9 +42,7 @@
             }, i * 80);
          })">
 
-        <a href="{{ request()->routeIs('admin.*')
-    ? route('admin.dashboard')
-    : route('kasir.dashboard') }}" class="group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
+        <a href="{{ $isAdminPage ? route('admin.dashboard') : route('kasir.dashboard') }}" class="group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
 transition-all duration-300 ease-out
 hover:bg-blue-50
 hover:text-blue-600
@@ -55,7 +64,7 @@ hover:shadow-md
             </svg>
             <span x-show="sidebarOpen" x-transition:enter="transition ease-out duration-200 delay-75"
                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="whitespace-nowrap">
-                {{ request()->routeIs('admin.dashboard') ? 'Admin Dashboard' : 'Kasir Dashboard' }}
+                {{ $isAdminPage ? 'Admin Dashboard' : 'Kasir Dashboard' }}
             </span>
         </a>
 
@@ -101,8 +110,8 @@ hover:shadow-md
                                     hover:translate-x-2
                                     hover:shadow-md
                                     {{ request()->routeIs('kategori.*')
-            ? 'bg-blue-600 text-white shadow-lg scale-[1.02]'
-            : 'text-gray-600'
+        ? 'bg-blue-600 text-white shadow-lg scale-[1.02]'
+        : 'text-gray-600'
                                     }}">
 
                 <span

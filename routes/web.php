@@ -14,7 +14,8 @@ Route::get('/', function () {
 // ADMIN
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    Route::get('/admin', fn() => view('admin.dashboard'))
+    Route::get('/admin', [DashboardController::class, 'index'])
+        ->middleware(['auth'])
         ->name('admin.dashboard');
 
     Route::resource('products', ProdukController::class)
@@ -22,10 +23,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('kategori', KategoriController::class);
 });
-
-Route::get('/admin', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('admin.dashboard');
 
 
 // KASIR
