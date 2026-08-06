@@ -154,7 +154,11 @@ class TransaksiController extends Controller
         $keyword = $request->input('cari');
         $tanggal = $request->input('tanggal');
 
-        $transaksis = Transaction::with('kasir')
+
+
+        $transaksis = Transaction::with([
+        'kasir',
+        'details.produk'])
             ->when($keyword, function ($query) use ($keyword) {
                 $query->where('name_cust', 'like', "%{$keyword}%")
                       ->orWhere('number_transaction', 'like', "%{$keyword}%");

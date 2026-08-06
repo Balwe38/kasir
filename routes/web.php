@@ -1,21 +1,25 @@
 <?php
 
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Kasir\DashboardController as KasirDashboardController;
+
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// ====================
 // ADMIN
+// ====================
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    Route::get('/admin', [DashboardController::class, 'index'])
-        ->middleware(['auth'])
+    Route::get('/admin', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
 
     Route::resource('products', ProdukController::class)
@@ -24,28 +28,42 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('kategori', KategoriController::class);
 });
 
-
+// ====================
 // KASIR
+// ====================
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
 
-    Route::get('/kasir', function () {
-        return view('kasir.dashboard');
-    })->name('kasir.dashboard');
+    Route::get('/kasir', [KasirDashboardController::class, 'index'])
+        ->name('kasir.dashboard');
 });
 
+// ====================
 // TRANSAKSI
+// ====================
 Route::middleware('auth')->group(function () {
 
-    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-    Route::post('/transaksi/tambah', [TransaksiController::class, 'tambahKeranjang'])->name('transaksi.tambah');
-    Route::delete('/transaksi/hapus/{produk_id}', [TransaksiController::class, 'hapusKeranjang'])->name('transaksi.hapus');
-    Route::post('/transaksi/simpan', [TransaksiController::class, 'simpan'])->name('transaksi.simpan');
-    Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'struk'])->name('transaksi.struk');
-    Route::get('/transaksi/riwayat', [TransaksiController::class, 'riwayat'])->name('transaksi.riwayat');
+    Route::get('/transaksi', [TransaksiController::class, 'index'])
+        ->name('transaksi.index');
 
+    Route::post('/transaksi/tambah', [TransaksiController::class, 'tambahKeranjang'])
+        ->name('transaksi.tambah');
+
+    Route::delete('/transaksi/hapus/{produk_id}', [TransaksiController::class, 'hapusKeranjang'])
+        ->name('transaksi.hapus');
+
+    Route::post('/transaksi/simpan', [TransaksiController::class, 'simpan'])
+        ->name('transaksi.simpan');
+
+    Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'struk'])
+        ->name('transaksi.struk');
+
+    Route::get('/transaksi/riwayat', [TransaksiController::class, 'riwayat'])
+        ->name('transaksi.riwayat');
 });
 
+// ====================
 // PROFILE
+// ====================
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -58,4 +76,4 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

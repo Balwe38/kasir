@@ -81,32 +81,56 @@
                                         Rp {{ number_format($produk->harga, 0, ',', '.') }}
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 text-sm text-gray-700">{{ $produk->stok }}</td>
-                                    <td class="px-3 sm:px-6 py-3 text-sm">
-                                        <a href="{{ route('produk.edit', $produk->id) }}" class="inline-block
-                                            px-3
-                                            py-1
-                                            rounded-md
-                                            text-blue-600
-                                            hover:bg-blue-600
-                                            hover:text-white
-                                            transition-all
-                                            duration-200
-                                            mr-2">Edit</a>
-                                        <form action="{{ route('produk.destroy', $produk->id) }}" method="POST"
-                                            class="inline" onsubmit="return confirm('Yakin mau hapus produk ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="inline-block
-                                            px-3
-                                            py-1
-                                            rounded-md
-                                            text-red-600
-                                            hover:bg-red-600
-                                            hover:text-white
-                                            transition-all
-                                            duration-200">Hapus</button>
-                                        </form>
-                                    </td>
+                                  <td class="px-3 sm:px-6 py-3 text-sm">
+    <div class="flex items-center gap-2">
+
+        <!-- Tombol Edit -->
+        <a href="{{ route('produk.edit', $produk->id) }}"
+            class="inline-flex items-center gap-2 rounded-lg bg-blue-500 px-3 py-2 text-white hover:bg-blue-600 transition">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 15l-4 1 1-4 8.586-8.586z"/>
+            </svg>
+
+            Edit
+        </a>
+
+        <!-- Tombol Hapus -->
+        <form action="{{ route('produk.destroy', $produk->id) }}"
+            method="POST"
+            onsubmit="return confirm('Yakin mau hapus produk ini?')">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                class="inline-flex items-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-white hover:bg-red-600 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 7H5M10 11v6M14 11v6M9 7V4h6v3m-8 0h10l-1 13H8L7 7z"/>
+                </svg>
+
+                Hapus
+            </button>
+
+        </form>
+
+    </div>
+</td>
                                 </tr>
                             @empty
                                 <tr class="transition-all duration-200 hover:bg-gray-50">
