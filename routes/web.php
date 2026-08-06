@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +22,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('kategori', KategoriController::class);
 });
+
+Route::get('/admin', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('admin.dashboard');
+
 
 // KASIR
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {

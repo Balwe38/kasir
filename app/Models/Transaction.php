@@ -20,6 +20,11 @@ class Transaction extends Model
         'total_price',
     ];
 
+    protected $casts = [
+    'transaction_date' => 'datetime',
+    'total_price' => 'decimal:2',
+];
+
     public function details()
     {
         return $this->hasMany(TransactionDetail::class, 'id_transaction');
@@ -29,4 +34,6 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'id_kasir');
     }
+
+    
 }
