@@ -13,6 +13,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if(session('error'))
+                <div class="mb-4 rounded bg-red-100 border border-red-400 text-red-700 px-4 py-3">
+                    {{ session('error') }}
+                </div>
+            @endif
 
             <div class="bg-white overflow-hidden shadow-sm rounded-lg hover:shadow-lg transition-all duration-300">
                 <div class="p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
