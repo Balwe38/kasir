@@ -26,8 +26,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
    Route::get('/admin', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
 
-    Route::resource('products', ProdukController::class)
-        ->names('produk');
+   Route::resource('products', ProdukController::class)
+    ->names('produk')
+    ->parameters(['products' => 'produk']);
+        
 
     Route::resource('kategori', KategoriController::class);
 
