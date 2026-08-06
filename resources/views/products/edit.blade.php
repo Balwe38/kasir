@@ -6,43 +6,79 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white
+overflow-hidden
+shadow-sm
+rounded-lg
+hover:shadow-lg
+transition
+duration-300">
+                <div class="p-4 sm:p-6 text-gray-900">
                     <form action="{{ route('produk.update', $product->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <!-- Name -->
-                        <div>
+                        <div class="mt-4">
                             <x-input-label for="name" :value="__('Name')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="nama_produk"
-                                :value="old('nama_produk', $product->nama_produk)" required autofocus autocomplete="name" />
+                                :value="old('nama_produk', $product->nama_produk)" required autofocus
+                                autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <!-- Harga -->
-                        <div>
+                        <div class="mt-4">
                             <x-input-label for="price" :value="__('Price')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" name="harga"
                                 :value="old('price', $product->harga)" required autofocus autocomplete="price" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
                         <!-- Stok -->
-                        <div>
+                        <div class="mt-4">
                             <x-input-label for="stok" :value="__('Stok')" />
                             <x-text-input id="stok" class="block mt-1 w-full" type="number" name="stok"
                                 :value="old('stok', $product->stok)" required autofocus autocomplete="stok" />
                             <x-input-error :messages="$errors->get('stok')" class="mt-2" />
                         </div>
                         <!-- deksripsi -->
-                        <div>
+                        <div class="mt-4">
                             <x-input-label for="description" :value="__('Description')" />
                             <x-text-input id="description" class="block mt-1 w-full" type="text" name="description"
-                                :value="old('description', $product->description)" autofocus autocomplete="description" />
+                                :value="old('description', $product->description)" autofocus
+                                autocomplete="description" />
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
+                        <!-- kategori -->
+                        <div class="mt-4">
+                            <x-input-label for="kategori_id" :value="__('Category')" />
 
-                        <input type="submit" value="Simpan"
-                            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <select id="kategori_id" name="kategori_id"
+                                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                required>
+                                <option value="">-- Pilih Kategori --</option>
+
+                                @foreach ($kategoris as $kategori)
+                                    <option value="{{ $kategori->id }}" {{ old('kategori_id', $product->kategori_id) == $kategori->id ? 'selected' : '' }}>
+                                        {{ $kategori->nama_kategori }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <x-input-error :messages="$errors->get('kategori_id')" class="mt-2" />
+                        </div>
+
+                        <input type="submit" value="Simpan" class="mt-6
+w-full
+sm:w-auto
+bg-blue-600
+hover:bg-blue-700
+text-white
+font-semibold
+px-6
+py-2.5
+rounded-lg
+transition
+duration-200">
 
                     </form>
                 </div>

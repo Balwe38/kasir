@@ -14,54 +14,78 @@
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 flex gap-3">
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg hover:shadow-lg transition-all duration-300">
+                <div class="p-4 sm:p-6 flex flex-col sm:flex-row gap-3">
 
-                    <a href="{{ route('kategori.create') }}"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="{{ route('kategori.create') }}" class="w-full sm:w-auto
+bg-green-600
+hover:bg-green-700
+hover:scale-105
+active:scale-95
+transition-all
+duration-200
+text-white
+font-semibold
+py-2.5
+px-5
+rounded-lg
+shadow
+hover:shadow-lg
+text-center">
                         + Tambah Kategori
                     </a>
 
-                   
+
 
                 </div>
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900">
+                <div class="p-4 sm:p-6 text-gray-900 overflow-x-auto">
 
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full whitespace-nowrap divide-y divide-gray-200">
                         <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama
+                            <tr class="transition-all duration-200 hover:bg-gray-50">
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No
+                                </th>
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama
                                     Kategori</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jumlah
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Jumlah
                                     Produk</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                                <th class="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
 
                             @forelse ($kategoris as $kategori)
-                                <tr>
-                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                    <td class="px-3 sm:px-6 py-4 text-sm text-gray-700">
                                         {{ $loop->iteration }}
                                     </td>
 
-                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                    <td class="px-3 sm:px-6 py-4 text-sm text-gray-700">
                                         {{ $kategori->nama_kategori }}
                                     </td>
 
-                                    <td class="px-6 py-4 text-sm text-gray-700">
+                                    <td class="px-3 sm:px-6 py-4 text-sm text-gray-700">
                                         {{ $kategori->produks->count() }}
                                     </td>
 
-                                    <td class="px-6 py-4 text-sm">
+                                    <td class="px-3 sm:px-6 py-4 text-sm">
 
-                                        <a href="{{ route('kategori.edit', $kategori->id) }}"
-                                            class="text-blue-600 hover:text-blue-800 mr-3">
+                                        <a href="{{ route('kategori.edit', $kategori->id) }}" class="inline-block
+                                        px-3
+                                        py-1
+                                        rounded-md
+                                        text-blue-600
+                                        hover:bg-blue-600
+                                        hover:text-white
+                                        transition-all
+                                        duration-200
+                                        mr-2">
                                             Edit
                                         </a>
 
@@ -71,7 +95,15 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <button type="submit" class="text-red-600 hover:text-red-800">
+                                            <button type="submit" class="inline-block
+                                        px-3
+                                        py-1
+                                        rounded-md
+                                        text-red-600
+                                        hover:bg-red-600
+                                        hover:text-white
+                                        transition-all
+                                        duration-200">
                                                 Hapus
                                             </button>
 
@@ -82,8 +114,8 @@
 
                             @empty
 
-                                <tr>
-                                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                                <tr class="transition-all duration-200 hover:bg-gray-50">
+                                    <td colspan="4" class="px-3 sm:px-6 py-4 text-center text-gray-500">
                                         Belum ada kategori.
                                     </td>
                                 </tr>
