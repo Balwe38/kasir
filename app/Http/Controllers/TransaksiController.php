@@ -7,6 +7,7 @@ use App\Models\Produk;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class TransaksiController extends Controller
@@ -75,7 +76,6 @@ class TransaksiController extends Controller
 
     public function simpan(TransaksiRequest $request)
     {
-
         $keranjang = session('keranjang', []);
 
         if (empty($keranjang)) {
@@ -88,32 +88,48 @@ class TransaksiController extends Controller
             return back()->with('error', 'Uang bayar kurang dari total');
         }
 
-        $transaction = Transaction::create([
-            'id_kasir'           => auth()->id(),
-            'number_transaction' => 'TRX-' . now()->format('Ymd') . '-' . strtoupper(Str::random(4)),
-            'name_cust'          => $request->name_cust,
-            'transaction_date'   => now(),
-            'total_price'        => $total,
-        ]);
+        DB::transaction(function () use ($request, $keranjang, $total, &$transaction) {
 
-        foreach ($keranjang as $produk_id => $item) {
+            sleep(10);
 
-            TransactionDetail::create([
-                'id_transaction' => $transaction->id,
-                'id_product' => $produk_id,
-                'qty' => $item['qty'],
-                'price' => $item['harga'],
-                'discount_price' => $item['discount_price'] ?? 0,
-                'discount_percent' => $item['discount_percent'] ?? 0,
+            $transaction = Transaction::create([
+                'id_kasir' => auth()->id(),
+                'number_transaction' => 'TRX-' . now()->format('Ymd') . '-' . strtoupper(Str::random(4)),
+                'name_cust' => $request->name_cust,
+                'transaction_date' => now(),
+                'total_price' => $total,
             ]);
 
-            Produk::where('id', $produk_id)
-                ->decrement('stok', $item['qty']);
-        }
+            foreach ($keranjang as $produk_id => $item) {
+                
+                sleep(10);
 
-        // simpan info bayar & kembalian sementara untuk ditampilkan di struk
+                TransactionDetail::create([
+                    'id_transaction' => $transaction->id,
+                    'id_product' => $produk_id,
+                    'qty' => $item['qty'],
+                    'price' => $item['harga'],
+                    'discount_price' => $item['discount_price'] ?? 0,
+                    'discount_percent' => $item['discount_percent'] ?? 0,
+                ]);
+
+                // Lock data produk agar transaksi lain menunggu
+                $produk = Produk::where('id', $produk_id)
+                    ->lockForUpdate()
+                    ->first();
+
+                // Cek stok
+                if ($produk->stok < $item['qty']) {
+                    throw new \Exception("Stok {$produk->nama_produk} tidak mencukupi.");
+                }
+
+                // Kurangi stok
+                $produk->decrement('stok', $item['qty']);
+            }
+        });
+
         session([
-            'bayar_' . $transaction->id     => $request->bayar,
+            'bayar_' . $transaction->id => $request->bayar,
             'kembalian_' . $transaction->id => $request->bayar - $total,
         ]);
 
