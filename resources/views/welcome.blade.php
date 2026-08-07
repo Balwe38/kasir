@@ -164,11 +164,6 @@
                             <h3 class="text-3xl font-bold text-emerald-600">100% Asli</h3>
                             <p class="text-sm font-medium text-slate-600 mt-1">Jaminan Kualitas Obat & Resep</p>
                         </div>
-                        <div
-                            class="p-6 bg-slate-50 rounded-xl border border-slate-200/80 shadow-sm hover:border-emerald-300 hover:shadow-md transition-all duration-300">
-                            <h3 class="text-3xl font-bold text-emerald-600">SIPA Valid</h3>
-                            <p class="text-sm font-medium text-slate-600 mt-1">Surat Izin Praktik Apoteker Terdaftar</p>
-                        </div>
                     </div>
                 </div>
             </div>
