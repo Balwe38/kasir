@@ -102,7 +102,7 @@ class TransaksiController extends Controller
 
             foreach ($keranjang as $produk_id => $item) {
                 
-                sleep(10);
+                sleep(5);
 
                 TransactionDetail::create([
                     'id_transaction' => $transaction->id,

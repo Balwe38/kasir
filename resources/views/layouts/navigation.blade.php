@@ -6,7 +6,8 @@
             request()->routeIs('produk.*') ||
             request()->routeIs('kategori.*') ||
             request()->routeIs('transaksi.*') ||
-            request()->routeIs('laporan.*')
+            request()->routeIs('laporan.*') ||
+            request()->routeIs('users.*')
         );
 @endphp
 
@@ -204,6 +205,50 @@ hover:bg-teal-50 hover:text-teal-600
 
 </a>
 
+@endif
+
+{{-- Kelola Akun --}}
+@if(auth()->user()->role === 'admin')
+<a href="{{ route('users.index') }}"
+    class="group relative flex items-center gap-3 px-3 py-2.5 rounded-lg
+    transition-all duration-300 ease-out
+    hover:bg-teal-50
+    hover:text-teal-600
+    hover:translate-x-2
+    hover:shadow-md
+    {{ request()->routeIs('users.*')
+        ? 'bg-teal-600 text-white shadow-lg scale-[1.02]'
+        : 'text-gray-600'
+    }}">
+
+    <span
+        class="absolute left-0 top-1/2 -translate-y-1/2 w-1 bg-teal-600 rounded-r-full transition-all duration-300
+        {{ request()->routeIs('users.*') ? 'h-6' : 'h-0' }}">
+    </span>
+
+    <svg class="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 20h5V4H2v16h5m10 0v-2a4 4 0 00-4-4H11a4 4 0 00-4 4v2m10 0H7m10-10a4 4 0 11-8 0 4 4 0 018 0z"/>
+    </svg>
+
+    <span x-show="sidebarOpen"
+        x-transition:enter="transition ease-out duration-200 delay-75"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        class="whitespace-nowrap">
+        Kelola Akun
+    </span>
+
+    <span x-show="!sidebarOpen"
+        class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded-md whitespace-nowrap z-20">
+        Kelola Akun
+    </span>
+</a>
 @endif
 
 

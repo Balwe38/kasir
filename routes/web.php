@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -23,13 +24,17 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
-   Route::get('/admin', [AdminDashboardController::class, 'index'])
-    ->name('admin.dashboard');
+    Route::get('/admin', [AdminDashboardController::class, 'index'])
+        ->name('admin.dashboard');
 
-   Route::resource('products', ProdukController::class)
-    ->names('produk')
-    ->parameters(['products' => 'produk']);
-        
+    Route::resource('users', UserController::class);
+
+    Route::resource('products', ProdukController::class)
+        ->names('produk')
+        ->parameters(['products' => 'produk']);
+
+    Route::get('/products/{produk}/detail', [ProdukController::class, 'detail'])
+        ->name('produk.detail');
 
     Route::resource('kategori', KategoriController::class);
 
@@ -91,4 +96,4 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

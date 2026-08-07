@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-     <div class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 rounded-2xl shadow-lg p-5 text-white">
-        <h2 class="text-3xl font-bold">
-            Daftar Obat
-        </h2>
+        <div class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 rounded-2xl shadow-lg p-5 text-white">
+            <h2 class="text-3xl font-bold">
+                Daftar Obat
+            </h2>
     </x-slot>
 
     <div class="py-12">
@@ -85,56 +85,60 @@
                                         Rp {{ number_format($produk->harga, 0, ',', '.') }}
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 text-sm text-gray-700">{{ $produk->stok }}</td>
-                                  <td class="px-3 sm:px-6 py-3 text-sm">
-    <div class="flex items-center gap-2">
+                                    <td class="px-3 sm:px-6 py-3 text-sm">
+                                        <div class="flex items-center gap-2">
 
-        <!-- Tombol Edit -->
-        <a href="{{ route('produk.edit', $produk->id) }}"
-            class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-3 py-2 text-white hover:bg-teal-700 transition">
+                                            <!-- Tombol Lihat Detail Obat -->
+                                            <a href="{{ route('produk.detail', $produk->id) }}"
+                                                class="inline-flex items-center gap-2 rounded-lg bg-blue-500 hover:bg-blue-600 px-3 py-2 text-white transition">
 
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 15l-4 1 1-4 8.586-8.586z"/>
-            </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 15l-4 1 1-4 8.586-8.586z" />
+                                                </svg>
 
-            Edit
-        </a>
+                                                Detail Obat
+                                            </a>
 
-        <!-- Tombol Hapus -->
-        <form action="{{ route('produk.destroy', $produk->id) }}"
-            method="POST"
-            onsubmit="return confirm('Yakin mau hapus obat ini?')">
 
-            @csrf
-            @method('DELETE')
+                                            <!-- Tombol Edit -->
+                                            <a href="{{ route('produk.edit', $produk->id) }}"
+                                                class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white bg-amber-500 hover:bg-amber-600 transition">
 
-            <button type="submit"
-                class="inline-flex items-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-white hover:bg-red-600 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L12 15l-4 1 1-4 8.586-8.586z" />
+                                                </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 7H5M10 11v6M14 11v6M9 7V4h6v3m-8 0h10l-1 13H8L7 7z"/>
-                </svg>
+                                                Edit
+                                            </a>
 
-                Hapus
-            </button>
+                                            <!-- Tombol Hapus -->
+                                            <form action="{{ route('produk.destroy', $produk->id) }}" method="POST"
+                                                onsubmit="return confirm('Yakin mau hapus obat ini?')">
 
-        </form>
+                                                @csrf
+                                                @method('DELETE')
 
-    </div>
-</td>
+                                                <button type="submit"
+                                                    class="inline-flex items-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-white hover:bg-red-600 transition">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7H5M10 11v6M14 11v6M9 7V4h6v3m-8 0h10l-1 13H8L7 7z" />
+                                                    </svg>
+
+                                                    Hapus
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="transition-all duration-200 hover:bg-teal-50/40">
