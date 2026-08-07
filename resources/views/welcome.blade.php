@@ -102,10 +102,6 @@
                     <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-white">
                         Solusi Obat Terpercaya & Pelayanan Apoteker Profesional
                     </h1>
-                    <p class="text-lg text-slate-300">
-                        Kami menyediakan obat-obatan berkualitas, racikan resep dokter yang akurat, serta konsultasi
-                        penggunaan obat yang aman untuk keluarga Anda.
-                    </p>
                     <div class="pt-2 flex flex-wrap gap-4">
                         <a href="#about"
                             class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:-translate-y-0.5">
