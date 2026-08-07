@@ -19,8 +19,8 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-tight text-white block leading-tight">Apotek Sehat Utama</span>
-                    <span class="text-xs text-slate-400 font-medium">Apoteker: apt. John Doe, S.Farm</span>
+                    <span class="text-xl font-bold tracking-tight text-white block leading-tight">Apotek Sehat P4</span>
+                    <span class="text-xs text-slate-400 font-medium">Apoteker: apt.Dr.Tirta</span>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
 
             <!-- Footer Kiri -->
             <div class="relative z-10 text-xs text-slate-500">
-                &copy; {{ date('Y') }} Apotek Sehat Utama. All rights reserved.
+                &copy; {{ date('Y') }} Apotek Sehat P4. All rights reserved.
             </div>
         </div>
 

@@ -25,6 +25,7 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * Not used — "Tambah Akun" is handled by a modal on the index page.
      */
     public function create()
     {
@@ -62,6 +63,7 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * Not used — "Edit" is handled by a modal on the index page.
      */
     public function edit(string $id)
     {
