@@ -18,6 +18,12 @@ class ProdukController extends Controller
         $produks = Produk::with('kategori')->latest()->get();
         return view("products.index", compact('produks'));
     }
+    public function detail($id)
+    {
+        $produk = Produk::with('kategori')->findOrFail($id);
+
+        return view('products.detail', compact('produk'));
+    }
 
     public function create()
     {
