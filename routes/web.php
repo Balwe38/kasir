@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -25,6 +26,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
+
+    Route::resource('users', UserController::class);
 
     Route::resource('products', ProdukController::class)
         ->names('produk')
