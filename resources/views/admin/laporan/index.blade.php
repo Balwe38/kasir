@@ -2,9 +2,10 @@
 
 <x-slot name="header">
 
-<h2 class="text-2xl font-bold text-gray-800">
-Laporan Penjualan Obat
-</h2>
+ <div class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500 rounded-2xl shadow-lg p-5 text-white">
+        <h2 class="text-3xl font-bold">
+           Laporan Penjualan Obat
+        </h2>
 
 </x-slot>
 
