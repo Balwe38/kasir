@@ -51,7 +51,7 @@
             <div>
                 <span class="text-xl font-bold tracking-tight text-slate-900 block leading-tight">Apotek Sehat
                     Utama</span>
-                <span class="text-xs text-slate-500 font-medium">Apoteker: apt. John Doe, S.Farm</span>
+                <span class="text-xs text-slate-500 font-medium">Apoteker P4: Jakarta Pusat</span>
             </div>
         </div>
 
@@ -109,11 +109,11 @@
                     <div class="pt-2 flex flex-wrap gap-4">
                         <a href="#about"
                             class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:-translate-y-0.5">
-                            Tentang Saya
+                            Tentang Apotek
                         </a>
                         <a href="#services"
                             class="px-6 py-3 border border-slate-600 hover:bg-slate-800 text-white font-medium rounded-lg transition-all duration-300">
-                            Layanan Obat
+                            Deskripsi Obat
                         </a>
                     </div>
                 </div>
@@ -125,8 +125,8 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center space-y-3 mb-16 opacity-0 animate-enter"
                     style="animation-delay: 300ms;">
-                    <span class="text-emerald-600 font-semibold text-sm uppercase tracking-wider">Profil Apoteker</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">About Me</h2>
+                    <span class="text-emerald-600 font-semibold text-sm uppercase tracking-wider">Profil Apotek</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Tentang Apotek</h2>
                     <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full"></div>
                 </div>
 
