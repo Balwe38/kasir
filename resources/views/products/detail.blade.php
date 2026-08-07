@@ -80,7 +80,7 @@
                             </p>
 
                             <div class="mt-2 p-4 rounded-lg bg-gray-50 border">
-                                {{ $produk->deskripsi ?? 'Tidak ada deskripsi.' }}
+                                {{ $produk->description ?? 'Tidak ada deskripsi.' }}
                             </div>
                         </div>
 
