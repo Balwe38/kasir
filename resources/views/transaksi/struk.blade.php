@@ -37,6 +37,10 @@
                         <span>Customer</span>
                         <span>{{ $transaksi->name_cust }}</span>
                     </div>
+                    <div class="flex justify-between">
+                        <span>Metode Pembayaran</span>
+                        <span>{{ $transaksi->payment_method }}</span>
+                    </div>
                 </div>
 
                 <div class="border-t border-dashed border-gray-400 my-2"></div>

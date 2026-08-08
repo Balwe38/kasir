@@ -51,7 +51,7 @@
             <div>
                 <span class="text-xl font-bold tracking-tight text-slate-900 block leading-tight">Apotek Sehat
                     P4</span>
-                <span class="text-xs text-slate-500 font-medium">Apoteker: apt.Dr.Tirta</span>
+                <span class="text-xs text-slate-500 font-medium">Apoteker: apt.Dr.Bilal</span>
             </div>
         </div>
 
@@ -169,7 +169,7 @@
 
     <!-- Footer -->
     <footer class="w-full bg-slate-50 border-t border-slate-200 py-6 text-center text-sm text-slate-500">
-        &copy; {{ date('Y') }} Apotek Sehat P4 - apt.Dr.Tirta. All rights reserved.
+        &copy; {{ date('Y') }} Apotek Sehat P4 - apt.Dr.Bilal. All rights reserved.
     </footer>
 
 </body>

@@ -75,101 +75,128 @@ class TransaksiController extends Controller
     }
 
     public function simpan(TransaksiRequest $request)
-    {
-        $keranjang = session('keranjang', []);
+{
+    $keranjang = session('keranjang', []);
 
-        if (empty($keranjang)) {
-            return back()->with('error', 'Keranjang masih kosong');
-        }
+    // Cek keranjang
+    if (empty($keranjang)) {
+        return back()->with('error', 'Keranjang masih kosong.');
+    }
 
-        $total = collect($keranjang)->sum('subtotal');
+    // Hitung total
+    $total = collect($keranjang)->sum('subtotal');
 
-        if ($request->bayar < $total) {
-            return back()->with('error', 'Uang bayar kurang dari total');
-        }
+    // Cek uang bayar
+    if ((float) $request->bayar < (float) $total) {
+        return back()
+            ->withInput()
+            ->with(
+                'error',
+                'Uang bayar kurang. Total pembayaran Rp ' .
+                number_format($total, 0, ',', '.')
+            );
+    }
 
-        DB::transaction(function () use ($request, $keranjang, $total, &$transaction) {
+    DB::transaction(function () use (
+        $request,
+        $keranjang,
+        $total,
+        &$transaction
+    ) {
 
-            sleep(10);
+        // Buat transaksi
+        $transaction = Transaction::create([
+            'id_kasir' => auth()->id(),
+            'number_transaction' =>
+                'TRX-' .
+                now()->format('Ymd') .
+                '-' .
+                strtoupper(Str::random(4)),
 
-            $transaction = Transaction::create([
-                'id_kasir' => auth()->id(),
-                'number_transaction' => 'TRX-' . now()->format('Ymd') . '-' . strtoupper(Str::random(4)),
-                'name_cust' => $request->name_cust,
-                'transaction_date' => now(),
-                'total_price' => $total,
-            ]);
+            'name_cust' => $request->name_cust,
+            'transaction_date' => now(),
+            'total_price' => $total,
 
-            foreach ($keranjang as $produk_id => $item) {
-                
-                sleep(5);
-
-                TransactionDetail::create([
-                    'id_transaction' => $transaction->id,
-                    'id_product' => $produk_id,
-                    'qty' => $item['qty'],
-                    'price' => $item['harga'],
-                    'discount_price' => $item['discount_price'] ?? 0,
-                    'discount_percent' => $item['discount_percent'] ?? 0,
-                ]);
-
-                // Lock data produk agar transaksi lain menunggu
-                $produk = Produk::where('id', $produk_id)
-                    ->lockForUpdate()
-                    ->first();
-
-                // Cek stok
-                if ($produk->stok < $item['qty']) {
-                    throw new \Exception("Stok {$produk->nama_produk} tidak mencukupi.");
-                }
-
-                // Kurangi stok
-                $produk->decrement('stok', $item['qty']);
-            }
-        });
-
-        session([
-            'bayar_' . $transaction->id => $request->bayar,
-            'kembalian_' . $transaction->id => $request->bayar - $total,
+            'payment_method' => $request->payment_method,
+            'bayar' => $request->bayar,
+            'kembalian' => $request->bayar - $total,
         ]);
 
-        session()->forget('keranjang');
+        // Simpan detail transaksi
+        foreach ($keranjang as $produk_id => $item) {
 
-        return redirect()->route('transaksi.struk', $transaction->id)
-            ->with('success', 'Transaksi berhasil disimpan.');
-    }
+            // Lock produk
+            $produk = Produk::where('id', $produk_id)
+                ->lockForUpdate()
+                ->first();
 
-    public function struk(string $id)
-    {
-        $transaksi = Transaction::with(['details.produk', 'kasir'])->findOrFail($id);
+            if (!$produk) {
+                throw new \Exception('Produk tidak ditemukan.');
+            }
 
-        $bayar     = session('bayar_' . $id, $transaksi->total_price);
-        $kembalian = session('kembalian_' . $id, 0);
+            // Cek stok
+            if ($produk->stok < $item['qty']) {
+                throw new \Exception(
+                    "Stok {$produk->nama_produk} tidak mencukupi."
+                );
+            }
 
-        return view('transaksi.struk', compact('transaksi', 'bayar', 'kembalian'));
-    }
+            // Simpan detail
+            TransactionDetail::create([
+                'id_transaction' => $transaction->id,
+                'id_product' => $produk_id,
+                'qty' => $item['qty'],
+                'price' => $item['harga'],
+                'discount_price' => $item['discount_price'] ?? 0,
+                'discount_percent' => $item['discount_percent'] ?? 0,
+            ]);
+
+            // Kurangi stok
+            $produk->decrement('stok', $item['qty']);
+        }
+    });
+
+    // Kosongkan keranjang
+    session()->forget('keranjang');
+
+    // Pergi ke struk
+    return redirect()
+        ->route('transaksi.struk', $transaction->id)
+        ->with('success', 'Transaksi berhasil disimpan.');
+}
+
+   public function struk(string $id)
+{
+    $transaksi = Transaction::with(['details.produk', 'kasir'])->findOrFail($id);
+
+    $bayar = $transaksi->bayar;
+    $kembalian = $transaksi->kembalian;
+
+    return view('transaksi.struk', compact('transaksi', 'bayar', 'kembalian'));
+}
 
     public function riwayat(Request $request)
-    {
-        $keyword = $request->input('cari');
-        $tanggal = $request->input('tanggal');
+{
+    $keyword = $request->input('cari');
+    $tanggal = $request->input('tanggal');
 
-
-
-        $transaksis = Transaction::with([
+    $transaksis = Transaction::with([
         'kasir',
-        'details.produk'])
-            ->when($keyword, function ($query) use ($keyword) {
-                $query->where('name_cust', 'like', "%{$keyword}%")
-                      ->orWhere('number_transaction', 'like', "%{$keyword}%");
-            })
-            ->when($tanggal, function ($query) use ($tanggal) {
-                $query->whereDate('transaction_date', $tanggal);
-            })
-            ->latest('transaction_date')
-            ->paginate(15)
-            ->withQueryString();
+        'details.produk'
+    ])
+    ->when($keyword, function ($query) use ($keyword) {
+        $query->where(function ($q) use ($keyword) {
+            $q->where('name_cust', 'like', "%{$keyword}%")
+              ->orWhere('number_transaction', 'like', "%{$keyword}%");
+        });
+    })
+    ->when($tanggal, function ($query) use ($tanggal) {
+        $query->whereDate('transaction_date', $tanggal);
+    })
+    ->latest('transaction_date')
+    ->paginate(15)
+    ->withQueryString();
 
-        return view('transaksi.riwayat', compact('transaksis'));
-    }
+    return view('transaksi.riwayat', compact('transaksis'));
+}
 }

@@ -18,11 +18,16 @@ class Transaction extends Model
         'name_cust',
         'transaction_date',
         'total_price',
+        'payment_method',
+        'bayar',
+        'kembalian',
     ];
 
     protected $casts = [
     'transaction_date' => 'datetime',
     'total_price' => 'decimal:2',
+    'bayar' => 'decimal:2',
+    'kembalian' => 'decimal:2',
 ];
 
     public function details()

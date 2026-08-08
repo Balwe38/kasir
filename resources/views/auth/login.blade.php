@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <span class="text-xl font-bold tracking-tight text-white block leading-tight">Apotek Sehat P4</span>
-                    <span class="text-xs text-slate-400 font-medium">Apoteker: apt.Dr.Tirta</span>
+                    <span class="text-xs text-slate-400 font-medium">Apoteker: apt.Dr.Bilal</span>
                 </div>
             </div>
 
